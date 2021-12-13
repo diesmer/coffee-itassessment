@@ -26,7 +26,7 @@ export class CitiesController {
   @Get(':name/weather')
   async findWeather(@Param('name') name:string) {
     return this.weatherService.fineOneWeatherCity(name);
-  }
+  } 
 
   @Delete(':id')
   async delete(

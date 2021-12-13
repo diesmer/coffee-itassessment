@@ -3,19 +3,12 @@ export class OpenweatherResponse {
   
     name: string;
   
-    coord: {
-      lat: number;
-      lon: number;
-    };
-  
     weather: {
       id: number;
       main: string;
       description: string;
       icon: string;
     }[];
-  
-    base: string;
   
     main: {
       temp: number;
@@ -36,9 +29,7 @@ export class OpenweatherResponse {
     clouds: {
       all: number;
     };
-  
-    dt: number;
-  
+
     sys: {
       type: number;
       id: number;

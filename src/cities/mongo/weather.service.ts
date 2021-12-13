@@ -26,7 +26,7 @@ export class WeatherService {
     const expirationDate = new Date();
     const city = new this.weatherModel({
       cityName: createCityDto.cityName,
-      weather: data.data.weather[0].main ?? 'No info!',
+      weather: data.data.weather[0].main ?? 'Geen informatie beschikbaar!',
       temperature: data.data.main.temp,
       windSpeed: data.data.wind.speed,
       visibility: data.data.visibility,
@@ -50,12 +50,18 @@ export class WeatherService {
   }
 
   async fineOneWeatherCity(name: string) {
-    const data = await this.fetchWeather(name);
-    return {      
-    weather: data.data.weather[0].main ?? 'No info!',
-    temperature: data.data.main.temp,
-    windSpeed: data.data.wind.speed,
-    visibility: data.data.visibility,}
+    const itExists = await this.weatherModel.findOne({ cityName: name });
+    if(itExists) {
+      return itExists;
+    } else {
+      const data = await this.fetchWeather(name);
+      return {      
+      weather: data.data.weather[0].main ?? 'Geen informatie beschikbaar!',
+      temperature: data.data.main.temp,
+      windSpeed: data.data.wind.speed,
+      visibility: data.data.visibility,}
+    }   
+
   }
 
   async deleteWeather(id: string){
